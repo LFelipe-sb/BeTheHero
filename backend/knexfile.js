@@ -7,7 +7,8 @@ module.exports = {
     connection: {
       filename: './src/database/db.sqlite'
     },
-    migrations:{ //Migrations sao usados para as criações das tabelas via QueryBuilder.
+    //Para criar as migrations deve-se rodar o comando: npx knex migrate:make create_ongs
+    migrations:{ //Migrations sao usados para as criações das tabelas via QueryBuilder. 
       directory: './src/database/migrations' //Caminho aonde será criado nosso arquivo de BD. é necessario criar os diretorios antes.
     },
     useNullAsDefault: true,

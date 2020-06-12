@@ -1,7 +1,7 @@
 //Metodo UP é utilizado para realizar a execução dos comandos para criar uma tabela no banco de dados de acordo com os valores especificados.
 exports.up = function(knex) {
     return knex.schema.createTable('incidents', function(table){
-        table.incrememts;
+        table.increments();
 
         table.string('title').notNullable();
         table.string('description').notNullable();

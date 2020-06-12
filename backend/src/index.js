@@ -2,6 +2,9 @@ const express = require('express'); //Importando as funcionanlidade do Express. 
 const routes = require('./routes'); //Importando o routes que esta em um arquivo separado para melhor organização do codigo.
 const app = express(); //Variavel responsavel para armazenar a aplicação.
 
+const cors = require('cors');
+
+app.use(cors());
 app.use(express.json()); //Comando para que nossa aplicação possa reconhecer pasagens de dados via JSON.
 app.use(routes); //Fazendo uso do routes dentro do index.js.
 

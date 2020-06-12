@@ -15,4 +15,4 @@ exports.down = function(knex) {
   return knex.schema.dropTable('ongs');
 };
 
-//Para executar o codigo, deve-se rodar no terminal o comando: npx migrate:latest   
+//Para executar o codigo, deve-se rodar no terminal o comando: npx knex migrate:latest   
