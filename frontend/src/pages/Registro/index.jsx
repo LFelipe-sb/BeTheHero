@@ -1,12 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { FiArrowLeft } from 'react-icons/fi';
 import logoImg from '../../assets/logo.svg';
 
+import api from '../../service/api';
+
 import './style.css';
 
 function Register(){
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [whatsapp, setWahtsapp] = useState('');
+    const [city, setCity] = useState('');
+    const [uf, setUF] = useState('');
+
+    const history = useHistory();
+
+    async function handleRegister(event){
+        event.preventDefault();
+
+        try{
+            const data = {
+                name, email, whatsapp, city, uf
+            };
+            const response = await api.post('/ongs', data);
+            
+            alert(`Seu ID de acesso é: ${response.data.id}`);
+
+            setName('');
+            setEmail('');
+            setWahtsapp('');
+            setCity('');
+            setUF('');
+
+            history.push('/');
+
+        } catch(error){
+            alert(`Erro no cadastro. Tente novamento. \nCodigo Erro: ${error}`);
+        }
+    }
 
     return (
         <div className="register-container">
@@ -22,14 +56,40 @@ function Register(){
                     </Link>
                 </section>
 
-                <form action="">
-                    <input type="text" placeholder="Nome da ONG"/>
-                    <input type="email" placeholder="E-mail"/>
-                    <input type="text" placeholder="WhatsApp"/>
+                <form onSubmit={handleRegister}>
+                    <input type="text" 
+                        placeholder="Nome da ONG"
+                        value={name}
+                        onChange={e => setName(e.target.value)}          
+                        required
+                    />
+                    <input type="email" 
+                        placeholder="E-mail"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                    />
+                    <input type="text" 
+                        placeholder="WhatsApp"
+                        value={whatsapp}
+                        onChange={e => setWahtsapp(e.target.value)}
+                        required
+                    />
 
                     <div className="input-group">
-                        <input type="text" placeholder="Cidade"/>
-                        <input type="text" placeholder="UF" style={{width:80}}/>
+                        <input type="text" 
+                            placeholder="Cidade"
+                            value={city}
+                            onChange={e => setCity(e.target.value)}
+                            required
+                        />
+                        <input type="text" 
+                            placeholder="UF" 
+                            style={{width:80}}
+                            value={uf}
+                            onChange={e => setUF(e.target.value)}
+                            required
+                        />
                     </div>
 
                     <button className="button" type="submit">Cadastrar</button>
